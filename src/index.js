@@ -61,10 +61,10 @@ var fn = ()=> 'Hello!';
  console.log(f()); // выведет 13
  */
 function returnCounter(number=0) {
-    var num = number +1;
+    number +=1;
 
     return function () {
-        return num++;
+        return number++;
     }
 }
 
@@ -78,11 +78,7 @@ function returnCounter(number=0) {
  returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
  */
 function returnArgumentsArray() {
-    let arg=[];
-    for(let i=0; i< arguments.length; i++){
-        arg[i] = arguments[i];
-    }
-    return arg;
+    return [].slice.call(arguments)|| [];
 }
 
 /*
@@ -101,13 +97,10 @@ function returnArgumentsArray() {
  console.log(newSum()) выведет 6
  */
 function bindFunction() {
-    var that = this;
-    var newFunc;
+    var args;
     var fn = arguments[0];
-    for(let i = 1; i < arguments.length; i++){
-        fn = fn.bind(that, arguments[i]);
-    }
-    return ( fn);
+    args = [].slice.call(arguments, 1);
+    return ( fn.bind(null, ...args));
 }
 
 function sum(a, b) {
