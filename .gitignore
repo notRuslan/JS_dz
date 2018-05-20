@@ -4,6 +4,7 @@
 *.lock
 !yarn.lock
 *.log
+*.zip
 out/
 dist/
 node_modules/
