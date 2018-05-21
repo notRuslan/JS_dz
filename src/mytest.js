@@ -1,21 +1,12 @@
 /*
- Задание 5:
+ Задание 1:
 
- Функция должна перебрать все дочерние узлы элемента переданного в параметре where и удалить из него все текстовые узлы
-
- Задачу необходимо решить без использования рекурсии, то есть можно не уходить вглубь дерева.
- Так же будьте внимательны при удалении узлов, т.к. можно получить неожиданное поведение при переборе узлов
+ Функция должна добавлять обработчик fn события eventName к элементу target
 
  Пример:
- После выполнения функции, дерево <div></div>привет<p></p>loftchool!!!
- должно быть преобразовано в <div></div><p></p>
+ addListener('click', document.querySelector('a'), () => console.log('...')) // должна добавить указанный обработчик кликов на указанный элемент
  */
-function deleteTextNodes(where) {
-    for (let nod of  where.childNodes ){
-        if(nod.nodeType === 3){
-        console.log(nod.nodeType, nod);
-            nod.remove();
-        }
-    }
-
+function addListener(eventName, target, fn) {
+    target.preventDefault;
+    target.addEventListener(eventName, fn);
 }
