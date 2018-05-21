@@ -60,6 +60,17 @@ function prepend(what, where) {
    findAllPSiblings(document.body) // функция должна вернуть массив с элементами div и span т.к. следующим соседом этих элементов является элемент с тегом P
  */
 function findAllPSiblings(where) {
+    let next_p = [];
+    /*for (var i = 0; i < where.children.length; i++) {
+     console.log( where.children[i] ); // DIV, UL, DIV, SCRIPT
+     }*/
+    for(let el of where.children){
+        if(el.nextElementSibling && el.nextElementSibling.tagName == 'P'){
+            console.log('cur: ', el.tagName);
+            next_p.push( el);
+        }
+    }
+    return next_p;
 }
 
 /*

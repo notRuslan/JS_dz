@@ -1,19 +1,32 @@
 /*
- Задание 2:
+ Задание 3:
 
- Функция должна вставлять элемент, переданный в переметре what в начало элемента, переданного в параметре where
+ 3.1: Функция должна перебрать все дочерние элементы узла, переданного в параметре where
+
+ 3.2: Функция должна вернуть массив, состоящий из тех дочерних элементов следующим соседом которых является элемент с тегом P
 
  Пример:
- prepend(document.querySelector('#one'), document.querySelector('#two')) // добавит элемент переданный первым аргументом в начало элемента переданного вторым аргументом
+ Представим, что есть разметка:
+ <body>
+ <div></div>
+ <p></p>
+ <a></a>
+ <span></span>
+ <p></p>
+ </dody>
+
+ findAllPSiblings(document.body) // функция должна вернуть массив с элементами div и span т.к. следующим соседом этих элементов является элемент с тегом P
  */
-function prepend(what, where) {
-
-    // where.appendChild(what);
-    //Не понятно "в начало элемента" - этот элемент станет контейнером, или это сиблинг по отношению к where
-    console.log(where.firstChild);
-    where.insertBefore(what, where.children[0]); // или так :
-    /*let parent = where.parentNode;
-    parent.insertBefore(what, where);*/
-
-
+function findAllPSiblings(where) {
+    let next_p = [];
+    /*for (var i = 0; i < where.children.length; i++) {
+        console.log( where.children[i] ); // DIV, UL, DIV, SCRIPT
+    }*/
+        for(let el of where.children){
+            if(el.nextElementSibling && el.nextElementSibling.tagName == 'P'){
+            console.log('cur: ', el.tagName);
+                next_p.push( el);
+            }
+        }
+    return next_p;
 }
