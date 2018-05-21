@@ -118,6 +118,13 @@ function findError(where) {
    должно быть преобразовано в <div></div><p></p>
  */
 function deleteTextNodes(where) {
+    for (let nod of  where.childNodes ){
+        if(nod.nodeType === 3){
+            console.log(nod.nodeType, nod);
+            nod.remove();
+        }
+    }
+
 }
 
 /*
