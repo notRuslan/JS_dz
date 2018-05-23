@@ -1,17 +1,17 @@
 /*
- Задание 5:
+ Задание 6:
 
  Функция должна добавить такой обработчик кликов к элементу target,
- который реагирует (вызывает fn) только на клики по элементам BUTTON внутри target
+ который сработает только один раз и удалится (перестанет срабатывать для последующих кликов по указанному элементу)
 
  Пример:
- delegate(document.body, () => console.log('кликнули на button')) // добавит такой обработчик кликов для body, который будет вызывать указанную функцию только если кликнули на кнопку (элемент с тегом button)
+ once(document.querySelector('button'), () => console.log('обработчик выполнился!')) // добавит такой обработчик кликов для указанного элемента, который вызовется только один раз и затем удалится
  */
-function delegate(target, fn) {
-    // console.log(e);
-    target.addEventListener('click', function (e) {
-        if(e.target.tagName == "BUTTON"){
+function once(target, fn) {
+    function runner(){
         fn();
-        }
-    });
+        this.removeEventListener('click',runner);
+    }
+    target.addEventListener('click',runner);
+
 }
