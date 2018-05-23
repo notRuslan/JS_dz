@@ -1,14 +1,17 @@
 /*
- Задание 3:
+ Задание 5:
 
- Функция должна добавить к элементу target такой обработчик на события eventName, чтобы он отменял действия по умолчанию
+ Функция должна добавить такой обработчик кликов к элементу target,
+ который реагирует (вызывает fn) только на клики по элементам BUTTON внутри target
 
  Пример:
- skipDefault('click', document.querySelector('a')) // после вызова функции, клики на указанную ссылку не должны приводить к переходу на другую страницу
+ delegate(document.body, () => console.log('кликнули на button')) // добавит такой обработчик кликов для body, который будет вызывать указанную функцию только если кликнули на кнопку (элемент с тегом button)
  */
-function skipDefault(eventName, target) {
-    target.addEventListener(eventName, function(e){
-        e.preventDefault();
-        console.log('WORKS');
+function delegate(target, fn) {
+    // console.log(e);
+    target.addEventListener('click', function (e) {
+        if(e.target.tagName == "BUTTON"){
+        fn();
+        }
     });
 }
