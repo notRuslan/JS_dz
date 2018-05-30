@@ -1,17 +1,27 @@
-/*
- Задание 6:
+/*console.log('till');
+ const promise = new Promise(function(resolve, reject){
+ console.log('in');
+ });
+ console.log('out');*/
 
- Функция должна добавить такой обработчик кликов к элементу target,
- который сработает только один раз и удалится (перестанет срабатывать для последующих кликов по указанному элементу)
 
- Пример:
- once(document.querySelector('button'), () => console.log('обработчик выполнился!')) // добавит такой обработчик кликов для указанного элемента, который вызовется только один раз и затем удалится
- */
-function once(target, fn) {
-    function runner(){
-        fn();
-        this.removeEventListener('click',runner);
-    }
-    target.addEventListener('click',runner);
+function delay(ms) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            console.log('till');
+            resolve();
+            console.log('resolved');
+        }, ms)
+    });
 
 }
+
+const prom = delay(2000);
+prom
+    .then(() => console.log(1))
+    .then(() => {
+        setTimeout(() => console.log(2), 3000)
+    })
+    .then(() => {
+        setTimeout(() => console.log(3), 2000)
+    });
