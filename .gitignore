@@ -9,5 +9,5 @@ out/
 dist/
 node_modules/
 coverage/
-src/index.html
+#src/index.html
 #src/mytest.js
