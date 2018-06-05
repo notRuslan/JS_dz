@@ -6,13 +6,13 @@
  Функция должна возвращать Promise, который должен быть разрешен через указанное количество секунду
 
  Пример:
-   delayPromise(3) // вернет promise, который будет разрешен через 3 секунды
+ delayPromise(3) // вернет promise, который будет разрешен через 3 секунды
  */
-function delay(ms) {
+function delay(sec) {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve();
-        }, ms)
+        }, sec * 1000)
     });
 
 }
@@ -28,9 +28,32 @@ function delay(ms) {
  2.2: Элементы полученного массива должны быть отсортированы по имени города
 
  Пример:
-   loadAndSortTowns().then(towns => console.log(towns)) // должна вывести в консоль отсортированный массив городов
+ loadAndSortTowns().then(towns => console.log(towns)) // должна вывести в консоль отсортированный массив городов
  */
 function loadAndSortTowns() {
+    return new Promise( (resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json');
+        xhr.send();
+        xhr.responseType = 'json';
+        xhr.addEventListener('load', () => {
+            if(xhr.status >= 400){
+                reject();
+            }else{
+                const cities = xhr.response;
+                cities.sort((a , b) => {
+                    if(a.name > b.name){
+                        return 1;
+                    }else if(a.name < b.name){
+                        return -1;
+                    }
+                    return 0;
+                });
+                // console.log (cities);
+                resolve(cities);
+            }
+        });
+    });
 }
 
 export {

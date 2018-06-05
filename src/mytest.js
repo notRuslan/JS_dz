@@ -12,9 +12,29 @@
  loadAndSortTowns().then(towns => console.log(towns)) // должна вывести в консоль отсортированный массив городов
  */
 function loadAndSortTowns() {
-    return new Promise(
-
-    );
+    return new Promise( (resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json');
+    xhr.send();
+    xhr.responseType = 'json';
+    xhr.addEventListener('load', () => {
+        if(xhr.status >= 400){
+            reject();
+        }else{
+            const cities = xhr.response;
+            cities.sort((a , b) => {
+                if(a.name > b.name){
+                    return 1;
+                }else if(a.name < b.name){
+                    return -1;
+                }
+                return 0;
+            });
+            // console.log (cities);
+           resolve(cities);
+        }
+    });
+    });
 }
 
 
